@@ -15,3 +15,7 @@ SELECT colYear,colMonth FROM usairlineflights.flights;
 SELECT city,Origin,colYear,colMonth,AVG(flights.ArrDelay) as retard FROM usairlineflights.flights,usairlineflights.usairports 
 WHERE usairlineflights.flights.Origin=usairlineflights.usairports.IATA
 group by colMonth,colYear,Origin;
+
+
+SELECT UniqueCarrier, SUM(Cancelled) FROM usairlineflights.flights
+group by UniqueCarrier;
