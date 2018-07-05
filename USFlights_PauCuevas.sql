@@ -19,3 +19,12 @@ group by colMonth,colYear,Origin;
 
 SELECT UniqueCarrier, SUM(Cancelled) FROM usairlineflights.flights
 group by UniqueCarrier;
+
+SELECT TailNum,SUM(Distance)  FROM usairlineflights.flights
+group by TailNum LIMIT 0,10;
+
+SELECT UniqueCarrier,AVG(ArrDelay) as retard FROM usairlineflights.flights 
+WHERE 'retard'>'5'
+group by UniqueCarrier;
+
+
