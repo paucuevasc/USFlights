@@ -7,3 +7,11 @@ SELECT COUNT(flightID) FROM usairlineflights.flights;
 SELECT AVG(DepDelay) FROM usairlineflights.flights;
 SELECT AVG(ArrDelay) FROM usairlineflights.flights;
 
+SELECT Origin,colYear,colMonth,AVG(ArrDelay) as retard FROM usairlineflights.flights 
+group by colMonth,colYear,Origin;
+
+SELECT colYear,colMonth FROM usairlineflights.flights;
+
+SELECT city,Origin,colYear,colMonth,AVG(flights.ArrDelay) as retard FROM usairlineflights.flights,usairlineflights.usairports 
+WHERE usairlineflights.flights.Origin=usairlineflights.usairports.IATA
+group by colMonth,colYear,Origin;
