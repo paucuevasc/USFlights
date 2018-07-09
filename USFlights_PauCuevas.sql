@@ -1,32 +1,45 @@
 USE usairlineflights;
-SHOW COLUMNS FROM usairlineflights.flights;
-SELECT flightID FROM usairlineflights.flights;
+
 
 SELECT COUNT(flightID) FROM usairlineflights.flights;
 
-SELECT AVG(DepDelay) FROM usairlineflights.flights;
-SELECT AVG(ArrDelay) FROM usairlineflights.flights;
 
-SELECT Origin,colYear,colMonth,AVG(ArrDelay) as retard FROM usairlineflights.flights 
+SELECT Origin, AVG(DepDelay), AVG(ArrDelay)  
+FROM usairlineflights.flights
+GROUP BY Origin
+;
+
+
+SELECT Origin,colYear,colMonth,AVG(ArrDelay) as retard 
+FROM usairlineflights.flights 
+GROUP BY colMonth,colYear,Origin
+ORDER BY Origin, colYear, colMonth;
+
+
+SELECT city,Origin,colYear,colMonth,AVG(flights.ArrDelay) as retard 
+FROM usairlineflights.flights
+INNER JOIN  usairlineflights.usairports  ON flights.Origin=usairports.IATA
 group by colMonth,colYear,Origin;
 
-SELECT colYear,colMonth FROM usairlineflights.flights;
-
-SELECT city,Origin,colYear,colMonth,AVG(flights.ArrDelay) as retard FROM usairlineflights.flights,usairlineflights.usairports 
-WHERE usairlineflights.flights.Origin=usairlineflights.usairports.IATA
-group by colMonth,colYear,Origin;
 
 
-SELECT UniqueCarrier, SUM(Cancelled) FROM usairlineflights.flights
-group by UniqueCarrier;
+SELECT UniqueCarrier, COUNT(Cancelled) as totalCancelled
+FROM usairlineflights.flights
+WHERE Cancelled=1
+GROUP BY UniqueCarrier
+ORDER BY totalCancelled DESC;
 
-SELECT TailNum,SUM(Distance)  FROM usairlineflights.flights
-group by TailNum LIMIT 0,10;
+SELECT TailNum, SUM(Distance) as distanceTotal 
+FROM usairlineflights.flights
+GROUP BY TailNum
+ORDER BY distanceTotal DESC
+limit 10
+;
 
 SELECT UniqueCarrier, AVG(ArrDelay) as retard 
 FROM usairlineflights.flights 
 group by UniqueCarrier
 HAVING retard>10;
 
-
+SELECT carriers;
 
