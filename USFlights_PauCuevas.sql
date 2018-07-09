@@ -23,9 +23,10 @@ group by UniqueCarrier;
 SELECT TailNum,SUM(Distance)  FROM usairlineflights.flights
 group by TailNum LIMIT 0,10;
 
-SELECT UniqueCarrier,AVG(ArrDelay) as retard FROM usairlineflights.flights 
-WHERE 'retard'>'10'
-group by UniqueCarrier;
+SELECT UniqueCarrier, AVG(ArrDelay) as retard 
+FROM usairlineflights.flights 
+group by UniqueCarrier
+HAVING retard>10;
 
 
 
