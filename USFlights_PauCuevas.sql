@@ -25,7 +25,7 @@ group by colMonth,colYear,Origin;
 
 SELECT UniqueCarrier, COUNT(Cancelled) as totalCancelled
 FROM usairlineflights.flights
-WHERE Cancelled=1
+WHERE Cancelled=true
 GROUP BY UniqueCarrier
 ORDER BY totalCancelled DESC;
 
@@ -41,5 +41,4 @@ FROM usairlineflights.flights
 group by UniqueCarrier
 HAVING retard>10;
 
-SELECT carriers;
 
